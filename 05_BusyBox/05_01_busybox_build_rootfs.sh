@@ -1,5 +1,5 @@
 #!/bin/bash
-# 05_01_busybox_build_rootfs.sh（最终修复版）
+# 05_01_busybox_build_rootfs.sh（保留手动menuconfig配置版）
 set -e
 set -u
 
@@ -17,11 +17,11 @@ rm -rf "${ROOTFS_DIR}" "${IMG_NAME}"
 mkdir -p "${ROOTFS_DIR}"
 
 # 2. 进入源码目录编译 BusyBox
-echo "[1/5] 配置并编译静态 BusyBox..."
+echo "[1/5] 使用已有配置编译 BusyBox..."
 cd "${BUSYBOX_SRC}"
 
-# 加载配置并强制静态编译
-make CROSS_COMPILE="${CROSS_COMPILE}" defconfig
+# 【重点】不再执行 make defconfig，保留你手动menuconfig的配置
+# 仅强制开启静态编译（防止意外关闭）
 sed -i 's/^# CONFIG_STATIC is not set/CONFIG_STATIC=y/' .config
 
 # 编译
@@ -34,7 +34,7 @@ if [ ! -f busybox ]; then
 fi
 echo "✅ BusyBox 编译成功"
 
-# 3. 关键：从源码目录安装到 rootfs
+# 3. 安装到 rootfs
 echo "[2/5] 安装到 rootfs..."
 make CROSS_COMPILE="${CROSS_COMPILE}" CONFIG_PREFIX="${ROOTFS_DIR}" install
 cd "${BASE_DIR}"
@@ -55,13 +55,23 @@ chmod 777 tmp
 # 创建 /init 软链接
 ln -sf /bin/busybox init
 
-# 配置 rcS
+# 配置 rcS（固定IP + 启动telnetd/dropbear）
 cat > etc/init.d/rcS << EOF
 #!/bin/sh
 mount -t proc none /proc
 mount -t sysfs none /sys
 mount -t tmpfs tmpfs /tmp
 mdev -s
+
+# 启用网卡 + 固定IP
+ifconfig eth0 up
+ifconfig eth0 10.0.2.10 netmask 255.255.255.0
+route add default gw 10.0.2.2 eth0
+echo "nameserver 114.114.114.114" > /etc/resolv.conf
+
+# 启动远程服务
+telnetd
+dropbear
 EOF
 chmod +x etc/init.d/rcS
 
