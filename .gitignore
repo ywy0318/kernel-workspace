@@ -1,0 +1,20 @@
+# 屏蔽根文件系统镜像
+*.ext4
+# 源码压缩包
+*.tar.xz
+*.tar.bz2
+*.tar.gz
+# 磁盘镜像、编译产物
+*.img
+*.cpio
+*.log
+# 源码压缩包
+*.tar.xz
+*.tar.bz2
+*.tar.gz
+# 根文件系统镜像
+*.ext4
+*.img
+*.cpio
+# 日志、临时文件
+*.log
