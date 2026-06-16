@@ -1,6 +1,7 @@
 #!/bin/bash
 
-BUILDROOT_DIR="buildroot-2023.02.9"
+#BUILDROOT_DIR="buildroot-2023.02.9"
+BUILDROOT_DIR="buildroot-2025.02"
 
 echo -e "\n===== 多核编译：工具链 + 所有软件包 =====\n"
 
