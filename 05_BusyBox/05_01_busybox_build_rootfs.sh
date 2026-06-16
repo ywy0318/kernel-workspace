@@ -38,6 +38,9 @@ echo "✅ BusyBox 编译成功"
 echo "[2/5] 安装到 rootfs..."
 make CROSS_COMPILE="${CROSS_COMPILE}" CONFIG_PREFIX="${ROOTFS_DIR}" install
 cd "${BASE_DIR}"
+# 调用05_02脚本配置网络与登录密码
+echo "[自动配置] 调用05_03配置固定IP、telnet/ssh登录密码..."
+./05_02_prepare_rootfs_network_auth.sh "${ROOTFS_DIR}"
 
 # 检查安装结果
 if [ ! -d "${ROOTFS_DIR}/bin" ] || [ ! -f "${ROOTFS_DIR}/bin/busybox" ]; then
