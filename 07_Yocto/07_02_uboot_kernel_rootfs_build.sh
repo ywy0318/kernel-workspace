@@ -34,8 +34,10 @@ bitbake linux-libc-headers -c cleanall
 bitbake u-boot -c cleanall
 bitbake core-image-minimal -c cleanall
 
-echo -e "\n环境加载完成，开始编译 core-image-minimal（含UBoot+Linux6.18+ssh/telnet）"
-bitbake core-image-minimal
+#echo -e "\n环境加载完成，开始编译 core-image-minimal（含UBoot+Linux6.18+ssh/telnet）"
+#bitbake core-image-minimal
+echo -e "\n环境加载完成，开始编译 core-image-minimal + UBoot（Linux6.1+ssh/telnet）"
+bitbake core-image-minimal u-boot
 
 # 输出镜像路径并罗列文件
 IMG_OUT="${BUILD_DIR}/tmp/deploy/images/qemuarm64"
