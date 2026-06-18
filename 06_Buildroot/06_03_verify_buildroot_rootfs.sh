@@ -5,7 +5,8 @@ set -e
 set -u
 
 # ===================== 配置项（自行按需修改） =====================
-BUILDROOT_DIR="/home/ubuntu/workspace/06_Buildroot/buildroot-2023.02.9"
+#BUILDROOT_DIR="/home/ubuntu/workspace/06_Buildroot/buildroot-2023.02.9"
+BUILDROOT_DIR="/home/ubuntu/workspace/06_Buildroot/buildroot-2025.02"
 IMG_OUT_DIR="${BUILDROOT_DIR}/output/images"
 
 # 各固件路径（同步打包脚本，sdcard.img统一在images目录）
@@ -178,3 +179,4 @@ else
 fi
 echo "✅ 所有分立固件校验全部完成！"
 echo "========================================"
+

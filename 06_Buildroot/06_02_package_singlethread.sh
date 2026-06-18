@@ -1,6 +1,7 @@
 #!/bin/bash
 
-BUILDROOT_DIR="buildroot-2023.02.9"
+#BUILDROOT_DIR="buildroot-2023.02.9"
+BUILDROOT_DIR="buildroot-2025.02"
 IMG_OUT_DIR="${BUILDROOT_DIR}/output/images"
 ROOTFS_IMAGE="${IMG_OUT_DIR}/rootfs.ext4"
 UBOOT_BIN="${IMG_OUT_DIR}/u-boot.bin"
@@ -64,7 +65,7 @@ sudo losetup "${LOOP_DEV}" "${SD_IMG}"
 sudo partprobe "${LOOP_DEV}"
 
 # QEMU AArch64标准偏移写入U-Boot
-dd if="${UBOOT_BIN}" of="${LOOP_DEV}" bs=1K seek=8 conv=notrunc
+sudo dd if="${UBOOT_BIN}" of="${LOOP_DEV}" bs=1K seek=8 conv=notrunc
 
 sudo mkfs.ext4 -F "${LOOP_DEV}p1"
 
