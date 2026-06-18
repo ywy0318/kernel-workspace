@@ -46,7 +46,8 @@ else
 fi
 
 # local.conf：仅不存在时生成模板
-LOCAL_CONF="$LOCAL_CONF=$CONF_DIR/local.conf"
+#LOCAL_CONF="$LOCAL_CONF=$CONF_DIR/local.conf"
+LOCAL_CONF="$CONF_DIR/local.conf"
 LOCAL_CONF="$CONF_DIR/local.conf"
 if [ ! -f "$LOCAL_CONF" ]; then
     cat > "$LOCAL_CONF" <<'EOF'
