@@ -75,6 +75,10 @@ for f in 10_PerfOpt/*.sh; do [ -f "$f" ] && git add "$f"; done
 git add --update --no-all 11_QemuDebootstrapRootFS/. 2>/dev/null
 for f in 11_QemuDebootstrapRootFS/*.sh; do [ -f "$f" ] && git add "$f"; done
 
+# 新增：12_DiagramDrawio 目录脚本同步
+git add --update --no-all 12_DiagramDrawio/. 2>/dev/null
+for f in 12_DiagramDrawio/*.sh; do [ -f "$f" ] && git add "$f"; done
+
 # 同步脚本自身和.gitignore
 git add "$0" .gitignore 2>/dev/null
 
@@ -89,7 +93,7 @@ for f in $(git status --porcelain | grep "^A" | awk '{print $2}'); do
     fi
 done
 
-# 检查变更
+# 检查变更（过滤删除操作，不会推送文件删除）
 CHG=$(git status --porcelain | grep -v "^D")
 if [ -z "$CHG" ]; then
     echo "✅ 无新增/修改内容，无需推送"
