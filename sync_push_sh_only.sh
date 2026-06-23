@@ -23,6 +23,19 @@ git remote add origin "${REMOTE_ADDR}"
 # 3. 同步 mv/重命名/修改
 git add -u 2>/dev/null
 
+# =====================新增核心屏蔽代码=====================
+# 强制从暂存区剔除不需要上传的源码/编译缓存目录，防止误推送
+git reset HEAD -- \
+05_BusyBox/busybox-1.36.1 \
+06_Buildroot/buildroot-* \
+07_Yocto/build_uboot \
+07_Yocto/dl_shared \
+07_Yocto/sstate_shared \
+07_Yocto/yocto-sources \
+11_QemuDebootstrapRootFS/*-rootfs
+# =========================================================
+
+
 # --------------------------
 # 每个目录单独处理，只看首层脚本
 # --------------------------
