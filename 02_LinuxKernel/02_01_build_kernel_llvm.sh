@@ -77,7 +77,9 @@ sha256sum Image virt.dtb 2>/dev/null
 
 # 回到最初目录
 cd "$CUR_DIR" || exit
-
+# 查看编译器版本（最准确）
+#readelf -p .comment ./vmlinux
+#strings ./vmlinux | grep -i "gcc\|clang\|llvm" | head -5
 # ====================== 计算总耗时 ======================
 END_TIME=$(date +%s)
 ELAPSED_SEC=$((END_TIME - START_TIME))
