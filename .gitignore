@@ -19,3 +19,8 @@
 # 日志、临时文件
 *.log
 05_BusyBox/busybox-1.36.1/
+# Linux内核源码目录
+02_LinuxKernel/linux-6.1-gcc/
+02_LinuxKernel/linux-6.1-llvm/
+02_LinuxKernel/linux-6.18-gcc/
+02_LinuxKernel/linux-6.18-llvm/
