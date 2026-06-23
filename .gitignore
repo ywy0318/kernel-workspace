@@ -24,3 +24,4 @@
 02_LinuxKernel/linux-6.1-llvm/
 02_LinuxKernel/linux-6.18-gcc/
 02_LinuxKernel/linux-6.18-llvm/
+04_ManualRootFS/tmp_build_bash/
