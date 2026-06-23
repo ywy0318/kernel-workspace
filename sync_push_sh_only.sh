@@ -26,6 +26,11 @@ git add -u 2>/dev/null
 # =====================新增核心屏蔽代码=====================
 # 强制从暂存区剔除不需要上传的源码/编译缓存目录，防止误推送
 git reset HEAD -- \
+02_LinuxKernel/linux-6.1-gcc \
+02_LinuxKernel/linux-6.1-llvm \
+02_LinuxKernel/linux-6.18-gcc \
+02_LinuxKernel/linux-6.18-llvm \
+04_ManualRootFS/tmp_build_bash \
 05_BusyBox/busybox-1.36.1 \
 06_Buildroot/buildroot-* \
 07_Yocto/build_uboot \
@@ -33,6 +38,8 @@ git reset HEAD -- \
 07_Yocto/sstate_shared \
 07_Yocto/yocto-sources \
 11_QemuDebootstrapRootFS/*-rootfs
+
+
 # =========================================================
 
 
