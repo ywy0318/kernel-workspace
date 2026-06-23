@@ -18,3 +18,4 @@
 *.cpio
 # 日志、临时文件
 *.log
+05_BusyBox/busybox-1.36.1/
