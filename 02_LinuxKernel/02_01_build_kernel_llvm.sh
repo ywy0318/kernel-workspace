@@ -42,8 +42,8 @@ else
 fi
 
 echo -e "\n==== 开始编译内核（LLVM） ===="
-make O="$BUILD_DIR" -j$(nproc)
-
+#make O="$BUILD_DIR" -j$(nproc)
+make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- O="$BUILD_DIR" -j$(nproc)
 # 4. 关键文件路径
 IMAGE_SRC="$BUILD_DIR/arch/arm64/boot/Image"
 DTB_SRC="$BUILD_DIR/arch/arm64/boot/dts/arm/virt.dtb"

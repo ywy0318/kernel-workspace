@@ -36,12 +36,12 @@ esac
 # 进入源码目录并打开配置界面
 cd "$KERNEL_DIR" || { echo "进入内核目录失败"; exit 1; }
 echo "正在打开配置界面，编译目录：$BUILD_DIR"
-make O="$BUILD_DIR" menuconfig
-
+#make O="$BUILD_DIR" menuconfig
+make ARCH=arm64 O="$BUILD_DIR" menuconfig
 # 1. 自动适配内核新增配置，消除编译交互弹窗
-echo -e "\n=== 正在自动适配内核新增配置 olddefconfig ==="
-make O="$BUILD_DIR" olddefconfig
-echo "配置适配完成"
+#echo -e "\n=== 正在自动适配内核新增配置 olddefconfig ==="
+#make O="$BUILD_DIR" olddefconfig
+#echo "配置适配完成"
 
 # 2. grep批量校验 VIRTIO 三个关键驱动是否开启
 echo -e "\n=== 校验 VIRTIO 驱动配置状态 ==="
