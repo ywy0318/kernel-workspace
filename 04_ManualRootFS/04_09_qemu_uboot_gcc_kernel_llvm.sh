@@ -1,14 +1,14 @@
 #!/bin/bash
-# U-Boot:GCC编译 | 内核:LLVM编译 组合启动脚本
+# 04_06_qemu_uboot_gcc_kernel_llvm.sh | GCC U-Boot + LLVM Kernel QEMU
+# 移除SSH端口转发hostfwd参数，统一virt GICv3配置
 set -e
 
 echo "============================================="
-echo "04_05_qemu_uboot_gcc_kernel_llvm.sh | GCC U-Boot + LLVM Kernel QEMU"
+echo "04_06_qemu_uboot_gcc_kernel_llvm.sh | GCC U-Boot + LLVM Kernel QEMU"
 echo "============================================="
 echo "脚本启动时间: $(date '+%Y-%m-%d %H:%M:%S')"
 echo "============================================="
 
-# 路径：uboot(gcc) + rootfs(llvm，内置llvm编译kernel)
 UBOOT_BIN="./output_gcc/uboot/u-boot.bin"
 ROOTFS_IMG="./output_llvm/rootfs/rootfs.ext4"
 
@@ -35,6 +35,5 @@ qemu-system-aarch64 \
     -smp 1 \
     -m 1G \
     -bios "${UBOOT_BIN}" \
-    -drive format=ext4,file="${ROOTFS_IMG}",if=virtio \
-    -serial stdio \
+    -drive format=raw,file="${ROOTFS_IMG}",if=virtio \
     -nographic
