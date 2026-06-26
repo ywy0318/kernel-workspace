@@ -1,0 +1,24 @@
+===================== 内核调试工具目录对应说明 =====================
+1. printk_dmesg        存放printk、dmesg日志分析、Oops崩溃解析脚本与文档
+2. addr2line           存放内核栈地址符号解析addr2line实操案例
+3. gdb_kernel          内核GDB远程调试脚本、断点调试案例
+4. readelf             ELF内核镜像、ko驱动文件解析实操
+5. size_binutil        size工具分析内核镜像各段占用大小
+6. perf                perf性能采样、CPU/IO调度调优脚本与案例
+7. ftrace_tracecmd     ftrace、tracecmd内核函数追踪脚本
+8. KASAN               KASAN内核内存越界检测实验代码与日志
+9. strace              strace用户态程序系统调用跟踪实操
+10. bpftool_ebpf       bpftool操作eBPF程序、映射相关脚本
+11. bpftrace           bpftrace高性能追踪脚本案例
+12. kgdb               kgdb内核远程调试配置与实操
+13. kexec_kdump        kexec-tools、kdump内核崩溃转储捕获配置
+14. KCSAN              KCSAN并发数据竞争检测实验
+15. crash              crash工具分析kdump生成的内核转储文件
+16. LLVM               LLVM/Clang编译内核相关配置、实操文档
+17. checkpatch         checkpatch内核代码规范检查脚本与规则
+18. kmemleak           kmemleak内核内存泄漏检测日志与案例
+19. LockDep            LockDep内核死锁检测调试案例
+20. blktrace           blktrace块设备IO追踪、性能分析
+21. io_uring           io_uring异步IO框架测试脚本与文档
+22. devmem             devmem读写物理寄存器调试实操案例
+==================================================================
