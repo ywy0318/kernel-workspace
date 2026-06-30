@@ -41,6 +41,16 @@ make clean
 # 加载配置
 echo "[2/4] 加载 qemu_arm64_defconfig..."
 make qemu_arm64_defconfig
+#make virt_aarch64_defconfig
+# 自动开启设备树、booti、内置dtb、默认virt设备树
+#make scripts/config --enable CONFIG_OF_CONTROL
+#make scripts/config --enable CONFIG_CMD_BOOTI
+#make scripts/config --enable CONFIG_OF_EMBED
+#make scripts/config --set-str CONFIG_DEFAULT_DEVICE_TREE "virt-aarch64"
+
+# 同步更新配置，解决依赖冲突
+#make olddefconfig
+
 
 # 编译
 echo "[3/4] 开始编译 U-Boot (arm64 LLVM/clang)..."
