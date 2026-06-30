@@ -102,3 +102,15 @@ echo "🎉 构建完成！"
 echo "✅ 根文件系统目录：${ROOTFS_DIR}"
 echo "✅ 可启动镜像：${IMG_NAME}"
 echo "✅ rootfs/bin/ 目录大小：$(du -sh ${ROOTFS_DIR}/bin/)"
+
+# 生成128M空ext4镜像
+rm -f rootfs.ext4
+dd if=/dev/zero of=rootfs.ext4 bs=1M count=128
+mkfs.ext4 -F rootfs.ext4
+# 临时挂载并拷贝rootfs内容
+mkdir -p tmp_mnt
+sudo mount rootfs.ext4 tmp_mnt
+sudo cp -r rootfs/* tmp_mnt/
+sudo umount tmp_mnt
+rm -rf tmp_mnt
+echo "✅ ext4镜像 rootfs.ext4 打包完成"
