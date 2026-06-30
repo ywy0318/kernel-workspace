@@ -1,32 +1,26 @@
 #!/bin/bash
-# 04_08_06_qemu_uboot_llvm_kernel_llvm.sh
-# 配套04_06预处理脚本，方案1：Image内置rootfs单virtio磁盘
-# 组合：LLVM U-Boot + LLVM Kernel
 set -e
-
 echo "============================================="
-echo "04_08_06_qemu_uboot_llvm_kernel_llvm.sh | LLVM U-Boot + LLVM Kernel QEMU"
+echo "04_08_06_qemu_uboot_llvm_kernel_llvm.sh | LLVM U-Boot + LLVM Kernel"
 echo "============================================="
-echo "脚本启动时间: $(date '+%Y-%m-%d %H:%M:%S')"
+echo "启动时间: $(date '+%Y-%m-%d %H:%M:%S')"
 echo "============================================="
 
-UBOOT_BIN="./output_llvm/uboot/u-boot.bin"
-ROOTFS_IMG="./out_llvm_uboot_llvm_kernel/rootfs.ext4"
+IMG_DIR="./out_llvm_uboot_llvm_kernel"
+UBOOT_BIN="${IMG_DIR}/u-boot.bin"
+ROOTFS_IMG="${IMG_DIR}/rootfs.ext4"
+DTB_FILE="${IMG_DIR}/qemu-arm64.dtb"
 
-if [ ! -f "${UBOOT_BIN}" ];then
-    echo "❌ 错误：LLVM编译U-Boot不存在 ${UBOOT_BIN}"
-    exit 1
-fi
-if [ ! -f "${ROOTFS_IMG}" ];then
-    echo "❌ 错误：组合镜像不存在，请先执行04_06_prepare_uboot_kernel_img.sh"
+if [ ! -f "${UBOOT_BIN}" ] || [ ! -f "${ROOTFS_IMG}" ] || [ ! -f "${DTB_FILE}" ];then
+    echo "❌ 资源缺失，请先执行 ./04_06_prepare_uboot_kernel_img.sh"
     exit 1
 fi
 
-echo "✅ 文件校验完成，准备启动aarch64 virt仿真(U-Boot引导·单磁盘方案1)"
-echo "U-Boot路径(LLVM): ${UBOOT_BIN}"
-echo "根文件系统(内置LLVM内核): ${ROOTFS_IMG}"
-echo "QEMU退出快捷键：先按 Ctrl+A 松开，再按 X"
-echo "已指定GICv3中断控制器适配virt平台，无SSH端口转发"
+echo "✅ 校验通过"
+echo "U-Boot: ${UBOOT_BIN}"
+echo "rootfs: ${ROOTFS_IMG}"
+echo "dtb: ${DTB_FILE}"
+echo "退出快捷键：Ctrl+A 松开再按 X"
 echo "============================================="
 
 qemu-system-aarch64 \
@@ -36,4 +30,5 @@ qemu-system-aarch64 \
     -m 1G \
     -bios "${UBOOT_BIN}" \
     -drive format=raw,file="${ROOTFS_IMG}",if=virtio \
+    -dtb "${DTB_FILE}" \
     -nographic

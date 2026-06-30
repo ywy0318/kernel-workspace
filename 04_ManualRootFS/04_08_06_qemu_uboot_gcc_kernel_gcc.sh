@@ -1,38 +1,31 @@
 #!/bin/bash
-# 04_08_06_qemu_uboot_gcc_kernel_gcc.sh
-# 配套04_06预处理脚本，方案1：Image内置rootfs单virtio磁盘
-# 组合：GCC U-Boot + GCC Kernel
 set -e
+echo "=========================================="
+echo "04_08_06_qemu_uboot_gcc_kernel_gcc.sh | GCC U-Boot + GCC Kernel"
+echo "=========================================="
+echo "启动时间: $(date '+%Y-%m-%d %H:%M:%S')"
+echo "=========================================="
 
-echo "============================================="
-echo "04_08_06_qemu_uboot_gcc_kernel_gcc.sh | GCC U-Boot + GCC Kernel QEMU"
-echo "============================================="
-echo "脚本启动时间: $(date '+%Y-%m-%d %H:%M:%S')"
-echo "============================================="
+# 修正 IMG_DIR：使用相对路径 ./，不要用 /
+IMG_DIR="./out_gcc_uboot_gcc_kernel"
+UBOOT_BIN="${IMG_DIR}/u-boot.bin"
+ROOTFS_IMG="${IMG_DIR}/rootfs.ext4"
+# 注意：我们已经不用 -dtb 了，所以可以不定义 DTB_FILE，但保留也没关系
+DTB_FILE="${IMG_DIR}/qemu-arm64.dtb"
 
-# U-Boot固件路径
-UBOOT_BIN="./output_gcc/uboot/u-boot.bin"
-# 04_06脚本生成的内置内核rootfs镜像
-ROOTFS_IMG="./out_gcc_uboot_gcc_kernel/rootfs.ext4"
-
-# 文件校验
-if [ ! -f "${UBOOT_BIN}" ];then
-    echo "❌ 错误：GCC编译U-Boot不存在 ${UBOOT_BIN}"
-    exit 1
-fi
-if [ ! -f "${ROOTFS_IMG}" ];then
-    echo "❌ 错误：组合镜像不存在，请先执行04_06_prepare_uboot_kernel_img.sh"
+# 校验
+if [ ! -f "${UBOOT_BIN}" ] || [ ! -f "${ROOTFS_IMG}" ]; then
+    echo "资源缺失，请先执行 ./04_06_prepare_uboot_kernel_img.sh"
     exit 1
 fi
 
-echo "✅ 文件校验完成，准备启动aarch64 virt仿真(U-Boot引导·单磁盘方案1)"
-echo "U-Boot路径(GCC): ${UBOOT_BIN}"
-echo "根文件系统(内置GCC内核): ${ROOTFS_IMG}"
-echo "QEMU退出快捷键：先按 Ctrl+A 松开，再按 X"
-echo "已指定GICv3中断控制器适配virt平台，无SSH端口转发"
-echo "============================================="
+echo "✅ 校验通过"
+echo "U-Boot: ${UBOOT_BIN}"
+echo "rootfs: ${ROOTFS_IMG}"
+# 不再显示 dtb，因为我们不传它
+echo "退出快捷键: Ctrl+A 松开再按 X"
+echo "=========================================="
 
-# 单virtio磁盘，无-serial stdio，drive统一format=raw
 qemu-system-aarch64 \
     -M virt,gic-version=3 \
     -cpu cortex-a53 \

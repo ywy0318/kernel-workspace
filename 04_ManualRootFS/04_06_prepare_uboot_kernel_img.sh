@@ -1,90 +1,80 @@
 #!/bin/bash
 # 04_06_prepare_uboot_kernel_img.sh
-# 功能：批量生成4套组合镜像，方案1：Image内置进rootfs.ext4
-# 组合：uboot(gcc/llvm) × kernel(gcc/llvm)
-
+# 内置Image、拷贝dtb、拷贝对应u-boot.bin到每组目录
 set -euo pipefail
 
-# ========== 全局路径配置（和你现有脚本对齐，无需修改）==========
-# GCC产物根目录
-OUT_GCC="./output_gcc"
-# LLVM产物根目录
-OUT_LLVM="./output_llvm"
-# 临时挂载目录
+# ===================== 全局路径配置（上层../01_Uboot） =====================
+UBOOT_OUT_GCC="../01_Uboot/output-gcc"
+UBOOT_OUT_LLVM="../01_Uboot/output-llvm"
+KERNEL_GCC="./output_gcc"
+KERNEL_LLVM="./output_llvm"
 TMP_MNT="./tmp_mount_ext4"
-# 4套输出目录前缀
-DIR_PREFIX="out"
-
-# 定义四组组合：uboot工具链,kernel工具链
-COMBINATIONS=(
+DIR_OUT_PREFIX="out"
+COMB_LIST=(
     "gcc gcc"
     "gcc llvm"
     "llvm gcc"
     "llvm llvm"
 )
 
-# ========== 函数：挂载镜像并拷贝Image ==========
-copy_image_to_rootfs() {
+# ===================== 工具函数 =====================
+inject_image_to_rootfs() {
     local rootfs_file="$1"
-    local kernel_img_path="$2"
-
-    # 校验内核Image存在
-    if [ ! -f "${kernel_img_path}" ];then
-        echo "❌ 内核文件缺失：${kernel_img_path}"
-        exit 1
-    fi
-    # 校验rootfs镜像存在
-    if [ ! -f "${rootfs_file}" ];then
-        echo "❌ rootfs镜像缺失：${rootfs_file}"
-        exit 1
-    fi
-
-    # 创建临时挂载点
+    local img_src="$2"
     mkdir -p "${TMP_MNT}"
-    echo "🔧 挂载镜像 ${rootfs_file} 到 ${TMP_MNT}"
     sudo mount -o loop "${rootfs_file}" "${TMP_MNT}"
-
-    # 拷贝内核Image到镜像根目录
-    echo "📦 拷贝内核Image: ${kernel_img_path} → ${TMP_MNT}/Image"
-    sudo cp "${kernel_img_path}" "${TMP_MNT}/Image"
-
-    # 卸载镜像，释放锁
-    echo "🔌 卸载镜像..."
+    sudo cp "${img_src}" "${TMP_MNT}/Image"
     sudo umount "${TMP_MNT}"
-    echo "✅ 镜像处理完成: ${rootfs_file}"
-    echo "-----------------------------------------"
 }
 
-# ========== 主逻辑遍历四组组合 ==========
-echo "==================== 开始批量生成4套镜像组合 ===================="
-for combo in "${COMBINATIONS[@]}";do
-    # 拆分uboot工具链、kernel工具链
-    UB_TOOL=$(echo $combo | awk '{print $1}')
-    KERN_TOOL=$(echo $combo | awk '{print $2}')
+# 同时拷贝 dtb + u-boot.bin
+copy_uboot_dtb() {
+    local uboot_tool="$1"
+    local dst_dir="$2"
+    local src_dtb src_uboot
+    if [[ "${uboot_tool}" == "gcc" ]];then
+        src_dtb="${UBOOT_OUT_GCC}/qemu-arm64.dtb"
+        src_uboot="${UBOOT_OUT_GCC}/u-boot.bin"
+    else
+        src_dtb="${UBOOT_OUT_LLVM}/qemu-arm64.dtb"
+        src_uboot="${UBOOT_OUT_LLVM}/u-boot.bin"
+    fi
+    if [ ! -f "${src_dtb}" ] || [ ! -f "${src_uboot}" ];then
+        echo "❌ 缺失文件：${src_dtb} / ${src_uboot}"
+        exit 1
+    fi
+    cp "${src_dtb}" "${dst_dir}/qemu-arm64.dtb"
+    cp "${src_uboot}" "${dst_dir}/u-boot.bin"
+    echo "📋 DTB: ${src_dtb} → ${dst_dir}"
+    echo "📋 U-BOOT: ${src_uboot} → ${dst_dir}"
+}
 
-    # 生成输出目录名
-    TARGET_DIR="${DIR_PREFIX}_${UB_TOOL}_uboot_${KERN_TOOL}_kernel"
+# ===================== 主循环 =====================
+echo "==================== 批量生成4套组合资源 ===================="
+for combo in "${COMB_LIST[@]}";do
+    UB_TOOL=$(echo "${combo}" | awk '{print $1}')
+    KERN_TOOL=$(echo "${combo}" | awk '{print $2}')
+    TARGET_DIR="${DIR_OUT_PREFIX}_${UB_TOOL}_uboot_${KERN_TOOL}_kernel"
     mkdir -p "${TARGET_DIR}"
-    echo "📂 创建工作目录: ${TARGET_DIR}"
+    echo -e "\n📂 创建目录：${TARGET_DIR}"
 
-    # 原始rootfs路径
+    # 1.复制rootfs
     SRC_ROOTFS="./output_${KERN_TOOL}/rootfs/rootfs.ext4"
-    # 目标rootfs路径（复制一份到独立目录）
     DST_ROOTFS="${TARGET_DIR}/rootfs.ext4"
-
-    # 复制原始rootfs镜像
-    echo "📋 复制rootfs镜像: ${SRC_ROOTFS} → ${DST_ROOTFS}"
+    echo "📋 rootfs: ${SRC_ROOTFS} → ${DST_ROOTFS}"
     cp "${SRC_ROOTFS}" "${DST_ROOTFS}"
 
-    # 对应内核Image路径
+    # 2.注入内核Image
     SRC_IMAGE="./output_${KERN_TOOL}/kernel/Image"
+    echo "📦 注入Image到rootfs"
+    inject_image_to_rootfs "${DST_ROOTFS}" "${SRC_IMAGE}"
 
-    # 执行挂载+拷贝Image
-    copy_image_to_rootfs "${DST_ROOTFS}" "${SRC_IMAGE}"
+    # 3.拷贝dtb + u-boot.bin到当前组合目录
+    copy_uboot_dtb "${UB_TOOL}" "${TARGET_DIR}"
+
+    echo "✅ ${TARGET_DIR} 资源完成：rootfs.ext4 qemu-arm64.dtb u-boot.bin"
 done
 
-# 清理临时挂载目录
 rm -rf "${TMP_MNT}"
-echo "==================== 全部4套镜像处理完毕 ===================="
-echo "生成目录清单："
-ls -d out_*_uboot_*_kernel
+echo -e "\n==================== 全部预处理完成 ===================="
+ls -d ${DIR_OUT_PREFIX}_*_uboot_*_kernel
