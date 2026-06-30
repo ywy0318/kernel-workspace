@@ -40,7 +40,7 @@ make clean
 
 # 加载配置
 echo "[2/4] 加载 qemu_arm64_defconfig..."
-make qemu_arm64_defconfig
+#make qemu_arm64_defconfig
 #make virt_aarch64_defconfig
 # 自动开启设备树、booti、内置dtb、默认virt设备树
 #make scripts/config --enable CONFIG_OF_CONTROL
