@@ -12,7 +12,7 @@ unset MAKEFLAGS
 
 # ========== 注意：make clean 已加上，但是注释状态 ==========
 # 需要清理时，把前面的 # 删掉即可
-# make clean
+make clean
 
 # 多核编译所有内容（不打包）
 make -j$(nproc) world
