@@ -4,32 +4,29 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="vQZHbMT3uvQTwwiSJxn7-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="start_kernel" vertex="1">
-          <mxGeometry height="30" width="120" x="110" y="50" as="geometry" />
+        <mxCell id="qptRigJL6Fvg0TCgtVS8-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;start_kernel&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="270" x="1290" y="310" as="geometry" />
         </mxCell>
-        <mxCell id="vQZHbMT3uvQTwwiSJxn7-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="start_kernel" vertex="1">
-          <mxGeometry height="30" width="120" x="560" y="330" as="geometry" />
-        </mxCell>
-        <mxCell id="vQZHbMT3uvQTwwiSJxn7-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="start_kernel" vertex="1">
-          <mxGeometry height="30" width="120" x="570" y="110" as="geometry" />
-        </mxCell>
-        <mxCell id="vQZHbMT3uvQTwwiSJxn7-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="start_kernel" vertex="1">
-          <mxGeometry height="30" width="120" x="570" y="200" as="geometry" />
-        </mxCell>
-        <mxCell id="vQZHbMT3uvQTwwiSJxn7-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="start_kernel" vertex="1">
-          <mxGeometry height="30" width="120" x="430" y="250" as="geometry" />
-        </mxCell>
-        <mxCell id="vQZHbMT3uvQTwwiSJxn7-9" edge="1" parent="1" source="vQZHbMT3uvQTwwiSJxn7-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="vQZHbMT3uvQTwwiSJxn7-8" value="">
+        <mxCell id="qptRigJL6Fvg0TCgtVS8-2" edge="1" parent="1" source="qptRigJL6Fvg0TCgtVS8-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="qptRigJL6Fvg0TCgtVS8-4" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="vQZHbMT3uvQTwwiSJxn7-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;background-color: rgb(255, 255, 255); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; line-height: 19px; white-space: pre;&quot;&gt;set_task_stack_end_magic(&amp;amp;init_task);&lt;/div&gt;" vertex="1">
-          <mxGeometry height="30" width="310" x="110" y="130" as="geometry" />
+        <mxCell id="qptRigJL6Fvg0TCgtVS8-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;background-color: rgb(255, 255, 255); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; line-height: 19px; white-space: pre;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;set_task_stack_end_magic(&amp;amp;init_task);&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="50" width="550" x="1170" y="370" as="geometry" />
         </mxCell>
-        <mxCell id="vQZHbMT3uvQTwwiSJxn7-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="start_kernel" vertex="1">
-          <mxGeometry height="30" width="120" x="205" y="270" as="geometry" />
+        <mxCell id="qptRigJL6Fvg0TCgtVS8-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;background-color: rgb(255, 255, 255); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; line-height: 19px; white-space: pre;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;smp_setup_processor_id&lt;/font&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;()&lt;/font&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="335" x="1277.5" y="480" as="geometry" />
         </mxCell>
-        <mxCell id="vQZHbMT3uvQTwwiSJxn7-11" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="设置魔术定期检查" vertex="1">
-          <mxGeometry height="30" width="60" x="30" y="130" as="geometry" />
+        <mxCell id="qptRigJL6Fvg0TCgtVS8-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;b&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;设置魔术定期检查，0号进程,init_task 定义在&lt;/font&gt;&lt;span style=&quot;color: rgb(15, 17, 21); text-align: start; background-color: rgb(235, 238, 242);&quot;&gt;&lt;font face=&quot;Helvetica&quot; style=&quot;font-size: 24px;&quot;&gt;init/init_task.c&lt;/font&gt;&lt;/span&gt;&lt;/b&gt;&lt;div&gt;&lt;span style=&quot;text-align: start; background-color: rgb(235, 238, 242); color: rgb(15, 17, 21);&quot;&gt;&lt;font face=&quot;Helvetica&quot; style=&quot;&quot;&gt;&lt;font color=&quot;#0f1115&quot;&gt;&lt;span style=&quot;font-size: 24px;&quot;&gt;&lt;b&gt;struct task_struct init_task = INIT_TASK(init_task);&lt;/b&gt;&lt;/span&gt;&lt;/font&gt;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="540" x="630" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="qptRigJL6Fvg0TCgtVS8-6" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;font-weight: 600; color: rgb(15, 17, 21); text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;&lt;span class=&quot;&quot; style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot; face=&quot;Helvetica&quot;&gt;初始化与当前运行CPU（引导CPU）相关的核心信息&lt;/font&gt;&lt;/span&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="120" width="570" x="650" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="qptRigJL6Fvg0TCgtVS8-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;background-color: rgb(255, 255, 255); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; line-height: 19px; white-space: pre;&quot;&gt;&lt;span style=&quot;text-align: left;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;debug_objects_early_init();&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="370" x="1280" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="qptRigJL6Fvg0TCgtVS8-8" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;b&gt;&lt;span style=&quot;color: rgb(15, 17, 21); font-family: quote-cjk-patch, Inter, system-ui, -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Oxygen, Ubuntu, Cantarell, &amp;quot;Open Sans&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;&lt;span class=&quot;&quot; style=&quot;&quot;&gt;Debug Objects 调试子系统，&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;color: rgb(15, 17, 21); font-family: quote-cjk-patch, Inter, system-ui, -apple-system, BlinkMacSystemFont, &amp;quot;Segoe UI&amp;quot;, Roboto, Oxygen, Ubuntu, Cantarell, &amp;quot;Open Sans&amp;quot;, &amp;quot;Helvetica Neue&amp;quot;, sans-serif; text-align: start; background-color: rgb(255, 255, 255);&quot;&gt;利用静态内存构建基础框架&lt;/span&gt;&lt;/b&gt;&lt;/font&gt;" vertex="1">
+          <mxGeometry height="120" width="570" x="650" y="530" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
