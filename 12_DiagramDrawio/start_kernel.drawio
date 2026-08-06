@@ -1,9 +1,36 @@
 <mxfile host="app.diagrams.net">
   <diagram name="第 1 页" id="ltSftadfyv10XA7BNwE0">
-    <mxGraphModel>
+    <mxGraphModel dx="1022" dy="660" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="vQZHbMT3uvQTwwiSJxn7-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="start_kernel" vertex="1">
+          <mxGeometry height="30" width="120" x="110" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="vQZHbMT3uvQTwwiSJxn7-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="start_kernel" vertex="1">
+          <mxGeometry height="30" width="120" x="560" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="vQZHbMT3uvQTwwiSJxn7-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="start_kernel" vertex="1">
+          <mxGeometry height="30" width="120" x="570" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="vQZHbMT3uvQTwwiSJxn7-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="start_kernel" vertex="1">
+          <mxGeometry height="30" width="120" x="570" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="vQZHbMT3uvQTwwiSJxn7-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="start_kernel" vertex="1">
+          <mxGeometry height="30" width="120" x="430" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="vQZHbMT3uvQTwwiSJxn7-9" edge="1" parent="1" source="vQZHbMT3uvQTwwiSJxn7-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="vQZHbMT3uvQTwwiSJxn7-8" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vQZHbMT3uvQTwwiSJxn7-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;background-color: rgb(255, 255, 255); font-family: Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 14px; line-height: 19px; white-space: pre;&quot;&gt;set_task_stack_end_magic(&amp;amp;init_task);&lt;/div&gt;" vertex="1">
+          <mxGeometry height="30" width="310" x="110" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="vQZHbMT3uvQTwwiSJxn7-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="start_kernel" vertex="1">
+          <mxGeometry height="30" width="120" x="205" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="vQZHbMT3uvQTwwiSJxn7-11" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="设置魔术定期检查" vertex="1">
+          <mxGeometry height="30" width="60" x="30" y="130" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
