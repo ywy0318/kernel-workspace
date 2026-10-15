@@ -36,4 +36,3 @@ git push origin main || {
 }
 
 echo "✅ 03_DtsDev c/h/dts/dtsi 文件同步推送完成"
-x
