@@ -132,6 +132,7 @@ echo "$CHG"
 
 # 提交并推送
 git commit -m "同步一级目录+首层脚本 $(date '+%Y-%m-%d %H:%M:%S')"
+#git commit -m "同步一级目录+首层脚本 $(date '+%Y-%m-%d %H:%M:%S')"
 git push -u origin main
 
 echo -e "\n🎉 同步完成"
