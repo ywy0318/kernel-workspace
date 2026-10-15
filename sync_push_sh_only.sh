@@ -101,6 +101,10 @@ for f in 12_DiagramDrawio/*.sh; do [ -f "$f" ] && git add "$f"; done
 # ============ 新增 13_KernelDebugTools 同步逻辑 ============
 git add --update --no-all 13_KernelDebugTools/. 2>/dev/null
 for f in 13_KernelDebugTools/*.sh; do [ -f "$f" ] && git add "$f"; done
+# ============ 新增 14_UserKernelCode 同步逻辑 ============
+git add --update --no-all 14_UserKernelCode/. 2>/dev/null
+for f in 14_UserKernelCode/*.sh; do [ -f "$f" ] && git add "$f"; done
+
 
 # 同步脚本自身和.gitignore
 git add "$0" .gitignore 2>/dev/null

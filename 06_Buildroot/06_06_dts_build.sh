@@ -19,7 +19,7 @@ fi
 
 # 1. dtb反编译成dts（只需要第一次执行）
 echo "1. dtb -> dts 反编译: ${DUMP_DTB} ==> ${DTS_SRC}"
-dtc -I dtb -O dts "${DUMP_DTB}" -o "${DTS_SRC}"
+#dtc -I dtb -O dts "${DUMP_DTB}" -o "${DTS_SRC}"
 
 echo "👉 请手动修改 ${DTS_SRC} 设备树源码，修改完成后再次运行本脚本编译dtb"
 echo "2. dts -> dtb 编译: ${DTS_SRC} ==> ${MYVIRT_DTB}"
