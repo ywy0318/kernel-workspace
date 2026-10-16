@@ -4,11 +4,13 @@
 static int demo_probe(struct platform_device *pdev)
 {
     pr_info("probe function return error\n");
-    return -ENODEV; //probe返回失败
+    return -ENODEV;
 }
-static int demo_remove(struct platform_device *pdev)
+
+// 重点修改：返回值从 int → void
+static void demo_remove(struct platform_device *pdev)
 {
-    return 0;
+    pr_info("demo remove called\n");
 }
 
 static struct platform_driver demo_drv = {
@@ -21,13 +23,17 @@ static struct platform_driver demo_drv = {
 
 static int __init demo_init(void)
 {
+    pr_info("register platform driver\n");
     return platform_driver_register(&demo_drv);
 }
 
 static void __exit demo_exit(void)
 {
     platform_driver_unregister(&demo_drv);
+    pr_info("module exit\n");
 }
+
 module_init(demo_init);
 module_exit(demo_exit);
 MODULE_LICENSE("GPL");
+
