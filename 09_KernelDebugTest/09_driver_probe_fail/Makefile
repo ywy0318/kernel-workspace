@@ -1,7 +1,16 @@
 obj-m += panic_demo.o
-KDIR ?= /lib/modules/$(shell uname -r)/build
+# ========= 这里改成你的构建输出目录，不是源码目录！=========
+KDIR ?= /home/ubuntu/workspace/02_LinuxKernel/build-gcc
+# 改成你的目标架构，比如arm64
+ARCH ?= arm64
+# 你的交叉编译器前缀
+CROSS_COMPILE ?= aarch64-linux-gnu-
+# ======================================================
 PWD := $(shell pwd)
+
 all:
-	make -C $(KDIR) M=$(PWD) modules
+	$(MAKE) -C $(KDIR) M=$(PWD) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) modules
+
 clean:
-	make -C $(KDIR) M=$(PWD) clean
+	$(MAKE) -C $(KDIR) M=$(PWD) clean
+
